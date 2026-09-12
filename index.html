@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placement Aptitude Lab</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <svg class="brand-mark" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="24" height="24" rx="5" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M7 17V9.5L13 13.5L19 9.5V17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-name">Placement Aptitude Lab</span>
+    </div>
+    <div id="topbar-status" class="topbar-status hidden">
+      <span class="status-chip" id="topbar-timer">Untimed</span>
+      <span class="status-chip status-chip-muted" id="topbar-progress">Q1 of 10</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+    <button class="nav-item" data-nav="home">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M3 10.5L10 4L17 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 9V16H15V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Practice</span>
+    </button>
+    <button class="nav-item" data-nav="categories">
+      <svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span>Categories</span>
+    </button>
+    <button class="nav-item" data-nav="progress">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M4 16V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 16V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 16V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Progress</span>
+    </button>
+  </nav>
+
+  <main class="content" id="main-content">
+
+    <!-- HOME / SETUP -->
+    <section class="view" id="view-home" data-view="home">
+      <div class="view-header">
+        <h1>Practice setup</h1>
+        <p class="view-subtitle">Configure a session and start practicing for your placement drive.</p>
+      </div>
+
+      <div class="setup-grid">
+        <form class="card setup-card" id="setup-form">
+
+          <div class="field-group">
+            <label class="field-label" for="source-select">Source</label>
+            <select class="field-control" id="source-select">
+              <option value="all">Random — All Categories</option>
+              <option value="quantitative">Quantitative Aptitude</option>
+              <option value="logical">Logical Reasoning</option>
+              <option value="verbal">Verbal Ability</option>
+              <option value="technical">Technical / IT Aptitude</option>
+              <option value="single">Single Category</option>
+            </select>
+          </div>
+
+          <div class="field-group hidden" id="single-category-group">
+            <label class="field-label" for="single-category-select">Category</label>
+            <select class="field-control" id="single-category-select"></select>
+          </div>
+
+          <div class="field-group">
+            <span class="field-label">Number of questions</span>
+            <div class="chip-row" id="count-options" role="radiogroup" aria-label="Number of questions">
+              <button type="button" class="chip" data-count="10">10</button>
+              <button type="button" class="chip" data-count="20">20</button>
+              <button type="button" class="chip" data-count="30">30</button>
+              <button type="button" class="chip" data-count="50">50</button>
+              <button type="button" class="chip" data-count="90">90</button>
+              <button type="button" class="chip" data-count="all">All available</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <span class="field-label">Difficulty</span>
+            <div class="chip-row" id="difficulty-options" role="radiogroup" aria-label="Difficulty">
+              <button type="button" class="chip" data-difficulty="easy">Easy</button>
+              <button type="button" class="chip" data-difficulty="medium">Medium</button>
+              <button type="button" class="chip" data-difficulty="hard">Hard</button>
+              <button type="button" class="chip" data-difficulty="mixed">Mixed</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="timer-toggle-row">
+              <label class="field-label" for="timer-enabled">Timer</label>
+              <label class="switch">
+                <input type="checkbox" id="timer-enabled">
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+              </label>
+            </div>
+            <div class="timer-options" id="timer-options">
+              <div class="chip-row" id="timer-preset-options" role="radiogroup" aria-label="Timer presets">
+                <button type="button" class="chip" data-minutes="10">10 min</button>
+                <button type="button" class="chip" data-minutes="15">15 min</button>
+                <button type="button" class="chip" data-minutes="20">20 min</button>
+                <button type="button" class="chip" data-minutes="30">30 min</button>
+                <button type="button" class="chip" data-minutes="45">45 min</button>
+                <button type="button" class="chip" data-minutes="60">60 min</button>
+              </div>
+              <div class="custom-timer-row">
+                <label for="custom-minutes" class="field-sublabel">Custom (minutes)</label>
+                <input type="number" id="custom-minutes" class="field-control field-control-small" min="1" max="240" placeholder="e.g. 25">
+              </div>
+            </div>
+          </div>
+
+          <p class="setup-note" id="setup-note"></p>
+
+          <button type="submit" class="btn btn-primary btn-block" id="start-practice-btn">Start Practice</button>
+        </form>
+
+        <aside class="card setup-summary" id="setup-summary">
+          <h2 class="summary-title">Session summary</h2>
+          <dl class="summary-list" id="summary-list"></dl>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="view hidden" id="view-categories" data-view="categories">
+      <div class="view-header">
+        <h1>Categories</h1>
+        <p class="view-subtitle">Browse the full question bank grouped by section.</p>
+      </div>
+      <div id="categories-groups"></div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section class="view hidden" id="view-progress" data-view="progress">
+      <div class="view-header">
+        <h1>Progress</h1>
+        <p class="view-subtitle">Your practice history, stored on this device.</p>
+      </div>
+
+      <div class="progress-stats" id="progress-stats"></div>
+
+      <div class="progress-columns">
+        <div class="card">
+          <h2 class="card-title">Category performance</h2>
+          <div id="progress-category-table"></div>
+        </div>
+        <div class="card">
+          <h2 class="card-title">Recent sessions</h2>
+          <div id="progress-recent-list"></div>
+        </div>
+      </div>
+
+      <button class="btn btn-danger-outline" id="reset-progress-btn">Reset Progress</button>
+    </section>
+
+    <!-- TEST -->
+    <section class="view hidden" id="view-test" data-view="test">
+      <div class="test-layout">
+        <div class="test-main">
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="test-progress-fill"></div>
+          </div>
+
+          <div class="question-meta">
+            <span class="badge" id="question-category-badge">Category</span>
+            <span class="badge badge-muted" id="question-difficulty-badge">Difficulty</span>
+          </div>
+
+          <h2 class="question-text" id="question-text">Question text</h2>
+
+          <div class="options-list" id="options-list" role="radiogroup"></div>
+
+          <div class="test-actions">
+            <button class="btn btn-secondary" id="mark-review-btn">Mark for Review</button>
+            <div class="test-actions-nav">
+              <button class="btn btn-outline" id="prev-question-btn">Previous</button>
+              <button class="btn btn-outline" id="next-question-btn">Next</button>
+              <button class="btn btn-primary hidden" id="finish-test-btn">Submit / Finish</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="test-palette">
+          <div class="palette-legend">
+            <span><i class="legend-dot legend-answered"></i>Answered</span>
+            <span><i class="legend-dot legend-marked"></i>Marked</span>
+            <span><i class="legend-dot legend-unanswered"></i>Unanswered</span>
+            <span><i class="legend-dot legend-current"></i>Current</span>
+          </div>
+          <div class="palette-grid" id="palette-grid"></div>
+          <button class="btn btn-primary btn-block" id="palette-finish-btn">Submit / Finish</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="view hidden" id="view-results" data-view="results">
+      <div class="view-header">
+        <h1>Session results</h1>
+        <p class="view-subtitle" id="results-subtitle"></p>
+      </div>
+
+      <div class="results-grid">
+        <div class="card results-score-card">
+          <div class="score-ring-wrap">
+            <svg viewBox="0 0 120 120" class="score-ring">
+              <circle cx="60" cy="60" r="52" class="score-ring-track"/>
+              <circle cx="60" cy="60" r="52" class="score-ring-fill" id="score-ring-fill"/>
+            </svg>
+            <div class="score-ring-label">
+              <span class="score-ring-value" id="score-ring-value">0%</span>
+              <span class="score-ring-caption">Accuracy</span>
+            </div>
+          </div>
+          <div class="score-breakdown" id="score-breakdown"></div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Performance by category</h2>
+          <div id="results-category-breakdown"></div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Performance by difficulty</h2>
+          <div id="results-difficulty-breakdown"></div>
+        </div>
+      </div>
+
+      <div class="results-actions">
+        <button class="btn btn-outline" id="review-answers-btn">Review Answers</button>
+        <button class="btn btn-outline" id="retry-same-btn">Retry Same Set</button>
+        <button class="btn btn-outline" id="new-practice-btn">New Practice</button>
+        <button class="btn btn-primary" id="back-dashboard-btn">Back to Dashboard</button>
+      </div>
+    </section>
+
+    <!-- REVIEW -->
+    <section class="view hidden" id="view-review" data-view="review">
+      <div class="view-header">
+        <h1>Review answers</h1>
+        <p class="view-subtitle">Go through each question with the correct answer and explanation.</p>
+      </div>
+      <div id="review-list"></div>
+      <div class="results-actions">
+        <button class="btn btn-primary" id="review-back-btn">Back to Results</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="bottom-nav-item" data-nav="home">
+    <svg viewBox="0 0 20 20" fill="none"><path d="M3 10.5L10 4L17 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 9V16H15V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Practice</span>
+  </button>
+  <button class="bottom-nav-item" data-nav="categories">
+    <svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+    <span>Categories</span>
+  </button>
+  <button class="bottom-nav-item" data-nav="progress">
+    <svg viewBox="0 0 20 20" fill="none"><path d="M4 16V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 16V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 16V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>Progress</span>
+  </button>
+</nav>
+
+<div class="modal-overlay hidden" id="confirm-modal">
+  <div class="modal-card">
+    <h3 id="confirm-modal-title">Are you sure?</h3>
+    <p id="confirm-modal-body"></p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" id="confirm-modal-cancel">Cancel</button>
+      <button class="btn btn-danger" id="confirm-modal-ok">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
